@@ -1,114 +1,90 @@
-# Challenge Toledo (2023)
+# 🏭 Challenge Toledo | Digital Twin & IoT (2023)
+
+![Unreal Engine](https://img.shields.io/badge/unrealengine-%23313131.svg?style=for-the-badge&logo=unrealengine&logoColor=white)
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![ESP32](https://img.shields.io/badge/espressif-E7352C.svg?style=for-the-badge&logo=espressif&logoColor=white)
 
 ![Representação do Unreal Engine para o Challenge Toledo](./images/PrototipoUnrealEngine.png)
 
-## Descrição do Projeto
+## 📌 Descrição do Projeto
 
-O projeto desenvolvido para o Challenge Toledo busca criar um gêmeo digital de um ambiente de pesagem industrial, incorporando tecnologias IoT e integração com a Amazon Web Services (AWS). O objetivo é simular com precisão as operações de pesagem em um ambiente virtual construído na Unreal Engine 5.1.1, sincronizando-o com um protótipo físico construído com ESP32. A conexão entre esses dois ambientes é estabelecida através da porta serial utilizando o plugin [Serial COM](https://github.com/videofeedback/Unreal_Engine_SerialCOM_Plugin).
+O projeto desenvolvido para o **Challenge Toledo (Toledo do Brasil - PRIX)** consiste na criação de um **Gêmeo Digital (Digital Twin)** de um ambiente de pesagem industrial, unindo tecnologias IoT à robustez da **Amazon Web Services (AWS)**. 
 
-O gêmeo digital permite que operadores e engenheiros realizem testes, otimizem processos, e aprimorem a eficiência do ambiente de pesagem industrial, tudo sem a necessidade de interagir diretamente com o sistema físico, economizando tempo e recursos.
+O sistema simula com extrema precisão operações de pesagem num ambiente virtual modelado em **Unreal Engine 5.1.1**, que se mantém sincronizado em tempo real com um protótipo físico baseado em **ESP32**. A comunicação entre o hardware e o motor gráfico é garantida através de comunicação serial, permitindo que operadores e engenheiros realizem testes de stress, otimização de processos e melhorias de eficiência sem necessidade de interação direta com o sistema físico (reduzindo custos e mitigações de risco).
 
-## Funcionalidades Principais
+---
 
-O projeto possui as seguintes funcionalidades principais:
+## 🚀 Funcionalidades Principais
 
-- **Gêmeo Digital**: Um ambiente virtual detalhado é construído na Unreal Engine 5.1.1, representando o ambiente de pesagem industrial. Ele é uma réplica fiel do sistema físico e permite a interação e simulação com diversos componentes, como sensores, atuadores e dispositivos de controle.
+* 🎮 **Gêmeo Digital (Unreal Engine 5.1.1):** Réplica fiel do sistema físico, permitindo a interação com sensores virtuais, atuadores e painéis de controlo através de um ambiente 3D imersivo.
+* ⚙️ **Hardware IoT (ESP32):** Protótipo físico equipado com sensores que simulam o processo real de pesagem, integrando diretamente os dados capturados.
+* 🔌 **Comunicação Serial em Tempo Real:** Troca bidirecional de dados entre o ESP32 e o Unreal Engine utilizando o plugin [Serial COM](https://github.com/videofeedback/Unreal_Engine_SerialCOM_Plugin).
+* ☁️ **Integração AWS (IoT Analytics & QuickSight):** Envio dos dados de telemetria diretamente do hardware para a nuvem da AWS (AWS IoT Core), redistribuindo a informação para a criação de *dashboards* de análise de dados avançada.
+* 🕹️ **Controlo Remoto Bidirecional:** O ambiente virtual pode atuar sobre o hardware físico, alterando parâmetros de forma remota e segura para testes de cenário.
 
-- **Protótipo Físico com ESP32**: Um protótipo físico é desenvolvido utilizando a plataforma ESP32. Esse protótipo é equipado com sensores e outros dispositivos relevantes para simular o processo de pesagem no ambiente industrial.
+<details>
+<summary><b>📸 Ver Dashboards e Arquitetura AWS</b> (Clique para expandir)</summary>
+<br>
 
-- **Conexão Serial**: A comunicação entre o ambiente virtual e o protótipo físico é estabelecida através da porta serial, utilizando o plugin Serial COM. Dados de sensores e comandos de controle são trocados em tempo real entre os dois sistemas.
+**Dashboards Web:**
+| Light Theme | Dark Theme |
+| :---: | :---: |
+| <img src="./images/WebsiteLight.png" width="400"/> | <img src="./images/WebsiteDark.png" width="400"/> |
 
-- **Visualização em Tempo Real**: As informações coletadas pelo protótipo físico são transmitidas para o ambiente virtual, permitindo a visualização em tempo real de dados como pesos medidos, status de dispositivos e outras informações relevantes.
-   ![Website Light](./images/WebsiteLight.png)
-   ![Website Dark](./images/WebsiteDark.png)
+**Arquitetura Cloud:**
+<img src="./images/ArquiteturaAWS.png" width="800"/>
+</details>
 
-- **Integração AWS**: Os dados de pesagem coletados pelo protótipo físico são enviados para a nuvem da AWS. No IoT Hub da AWS, os dados são redistribuídos entre diversos serviços, incluindo o IoT Analytics e o Quicksight, para análises e visualizações avançadas.
-   ![Arquitetura AWS](./images/ArquiteturaAWS.png)
+---
 
-- **Controle Remoto**: O ambiente virtual possibilita o controle remoto de atuadores no protótipo físico. Isso permite que os usuários testem diferentes cenários e modifiquem o comportamento do sistema físico de forma segura.
+## 📂 Estrutura de Arquivos
 
-## Arquivos do Projeto
+* 📄 `ESP32/ChallengeToledo.ino`: O "cérebro" físico. Código em C++ para o ESP32 responsável pela leitura de sensores, atuação física, comunicação Serial com a Unreal Engine e integração Wi-Fi/MQTT com a AWS.
+* 🔐 `ESP32/AWS_IOT/Secrets.h`: Ficheiro de configuração (ignorado no versionamento público) que armazena chaves privadas, certificados (*Amazon Root CA*), *endpoints* do IoT Core e credenciais de rede.
+* 📊 `EletronicaChallenge.xlsx`: Mapeamento detalhado e esquemático das ligações elétricas (pinagem de sensores e atuadores ao ESP32). Essencial para a montagem de hardware.
+* 📁 `AmbienteVR/`: O projeto completo da **Unreal Engine 5.1.1**. Contém todos os *Blueprints*, texturas, *assets* 3D e a lógica do Gêmeo Digital.
 
-O projeto é composto por vários arquivos que são fundamentais para a sua execução e compreensão. Abaixo estão os principais arquivos do projeto:
+---
 
-- **ChallengeToledo.ino**: Este arquivo contém o código-fonte da programação do ESP32. Ele é responsável por controlar os dispositivos físicos, ler os sensores e estabelecer a comunicação com o ambiente virtual por meio da porta serial. Além disso, o arquivo também incorpora a lógica de conexão Wi-Fi com a AWS para o envio dos dados coletados. 
-   
-   O código implementado nesse arquivo é essencial para o funcionamento adequado do protótipo físico e sua sincronização com o ambiente virtual na Unreal Engine 5.1.1. 
+## 🛠️ Guia de Instalação e Uso
 
-- **Secrets.h**: Arquivo localizado dentro do diretório ESP32/AWS_IOT, onde devem ser preenchidas as informações sensíveis, como chave privada, certificado do dispositivo, certificado da Amazon Root CA e o endpoint do Thing na AWS IoT, bem como informações de conexão Wi-Fi (SSID e senha).
+### 1. Preparação do Hardware (ESP32)
+1. Monte o protótipo físico seguindo o mapeamento da planilha `EletronicaChallenge.xlsx`.
+2. Configure as credenciais AWS e Wi-Fi no ficheiro `Secrets.h`.
+3. Faça o *flash* do código `ChallengeToledo.ino` para o seu microcontrolador ESP32.
+*(Verificação de montagem: ![Protótipo Fisico](./images/PrototipoFisico.png))*
 
-- **EletronicaChallenge.xlsx**: Esse arquivo é uma planilha eletrônica que descreve detalhadamente as conexões elétricas do protótipo físico desenvolvido com o ESP32. Ele mapeia a ligação dos sensores, atuadores e outros componentes eletrônicos ao ESP32, garantindo que a implementação física corresponda ao que é esperado pelo ambiente virtual. É uma referência importante para quem deseja montar o protótipo e entender a interconexão dos dispositivos.
+### 2. Configuração do Gêmeo Digital (Unreal Engine)
+1. Instale a versão **5.1.1** da Unreal Engine.
+2. Abra a *Engine*, vá a `File > Open Project` e selecione o projeto dentro do diretório `AmbienteVR`.
+3. Garanta que o ESP32 está conectado ao computador via USB. No projeto da Unreal, configure o nó do plugin **Serial COM** para apontar para a porta COM correta do microcontrolador.
 
-- **Ambiente Virtual na Unreal Engine**: O ambiente virtual da Unreal Engine é o coração do projeto. O arquivo fornecido no diretório 'AmbienteVR' é o projeto da Unreal Engine 5.1.1 que representa o ambiente de pesagem industrial em formato virtual. Ele contém todos os ativos, texturas, blueprints e configurações necessárias para criar o gêmeo digital. Os usuários podem abrir esse arquivo na Unreal Engine para visualizar, interagir e simular o ambiente de pesagem industrial.
+### 3. Execução e Análise de Dados
+Com os dois sistemas a correr, as métricas e interações físicas são refletidas no ambiente 3D. Os dados agregados podem ser consultados nos Dashboards do **AWS QuickSight**:
+* 📉 [Análise: Weight Truck](./images/WeightTruck.png)
+* 📉 [Análise: Weight Cell](./images/WeightCell.png)
+* 📉 [Análise: Weight Cell Pair](./images/WeightCellPair.png)
 
-## Instruções de Uso
+---
 
-Para utilizar, siga os passos abaixo:
+## 👥 Equipa de Desenvolvimento
+Projeto desenvolvido como trabalho académico do 4º ano de **Engenharia da Computação** na FIAP (2023).
 
-1. **Preparação do Ambiente Físico**:
+| Nome | RM | Turma |
+| :--- | :--- | :---: |
+| Carlos Henrique Neves Júnior | 82378 | 4ECR |
+| Felipe Gabriel Correa da Silva | 85487 | 4ECR |
+| Guilherme Rosa Campanha | 84162 | 4ECR |
+| Isabela Brito Pessoa | 85912 | 4ECR |
+| Leandro de Jesus Luna | 86492 | 4ECA |
+| Marcos Moura dos Santos | 86507 | 4ECR |
+| **Fabbio Augusto Boli** | **84695** | **-** |
 
-   - Montar o protótipo físico utilizando a plataforma ESP32 e os sensores necessários para a simulação de pesagem industrial.
-   - Conectar os dispositivos físicos ao ESP32, garantindo que todos os componentes estejam funcionando corretamente.
-   ![Protótipo Fisico](./images/PrototipoFisico.png)
+---
 
-2. **Preparação do Ambiente Virtual**:
+## 📬 Contacto & Agradecimentos
+Para questões técnicas ou operacionais sobre a arquitetura do projeto:
+📧 **Fabbio Boli:** fabinho871@live.com
 
-   - Instalar a Unreal Engine 5.1.1 em seu computador.
-   - Baixar os arquivos do ambiente virtual e importá-los para o projeto na Unreal Engine.
-
-3. **Conexão Serial**:
-
-   - Verificar a disponibilidade da porta serial no computador e garantir que o ESP32 esteja conectado corretamente.
-   - No ambiente virtual, configurar o plugin Serial COM para estabelecer a conexão serial com o ESP32.
-
-4. **Controle Remoto, Análise e Visualização**:
-
-   - Observar os dados coletados pelo protótipo físico sendo transmitidos para o ambiente virtual e, posteriormente, enviados para a AWS.
-   - Utilizar os controles virtuais para interagir com o protótipo físico e avaliar sua resposta.
-   - Acompanhar e analisar os dados coletados na AWS usando serviços como IoT Analytics e Quicksight.
-   ![Visualização Quicksight - 1](./images/WeightTruck.png)
-   ![Visualização Quicksight - 2](./images/WeightCell.png)
-   ![Visualização Quicksight - 3](./images/WeightCellPair.png)
-   
-5. **Otimização e Melhoria**:
-
-   - Utilizar os recursos de análise para identificar padrões e otimizar o processo de pesagem industrial, considerando os dados tanto do ambiente virtual quanto da AWS.
-
-
-### Instruções para abrir o projeto na Unreal Engine
-
-1. Baixe o arquivo do ambiente virtual da Unreal Engine dentro do diretório 'AmbienteVR' fornecido.
-   
-2. Abra a Unreal Engine 5.1.1 no seu computador.
-   
-3. No menu da Unreal Engine, clique em "File" (Arquivo) e selecione "Open Project" (Abrir Projeto).
-   
-4. Navegue até o local onde salvou o arquivo do ambiente virtual e selecione-o para abri-lo na Unreal Engine.
-
-5. Aguarde a Unreal Engine carregar o projeto. Uma vez carregado, você pode explorar e interagir com o gêmeo digital do ambiente de pesagem industrial.
-
-Lembrando que o ambiente virtual na Unreal Engine e o protótipo físico no ESP32 são partes integrantes do projeto. Ambos trabalham em conjunto, permitindo a simulação, teste e otimização do ambiente de pesagem industrial de forma mais segura e eficiente.
-
-## Colaboradores
-
-O projeto foi desenvolvido por um grupo de alunos do 4º ano do curso de Engenharia da Computação da FIAP. Os membros do grupo são:
-
-| Turma | Nome                            | RM     |
-|-------|---------------------------------|--------|
-| 4ECR  | Carlos Henrique Neves Júnior    | 82378  |
-| 4ECR  | Felipe Gabriel Correa da Silva | 85487  |
-| 4ECR  | Guilherme Rosa Campanha         | 84162  |
-| 4ECR  | Isabela Brito Pessoa           | 85912  |
-| 4ECA  | Leandro de Jesus Luna          | 86492  |
-| 4ECR  | Marcos Moura dos Santos        | 86507  |
-| Fabbio Augusto de Souza Moura Boli     | 84695  |
-
-## Contato
-
-Se você tiver alguma dúvida, sugestão ou desejar mais informações sobre o projeto, sinta-se à vontade para entrar em contato conosco:
-
-E-mail: leandro.j.luna@gmail.com
-
-## Agradecimentos
-
-Gostaríamos de agradecer a empresa Toledo do Brasil - PRIX pela oportunidade de participar do Challenge Toledo junto a FIAP. Foi uma experiência incrível e aprendemos muito com o projeto. Também gostaríamos de agradecer aos professores e mentores que nos ajudaram ao longo do desafio. Muito obrigado!
+Um especial agradecimento à **Toledo do Brasil (PRIX)** pelo desafio e parceria com a **FIAP**, bem como a todos os professores e mentores que orientaram a equipa durante o percurso tecnológico!
