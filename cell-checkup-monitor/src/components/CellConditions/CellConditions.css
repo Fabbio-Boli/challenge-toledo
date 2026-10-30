@@ -1,0 +1,12 @@
+.cell-label-id, .cell-label-weight{
+    text-align: center;
+    margin-top: 0.2em;
+}
+
+.cell-label-id{
+    font-size: 13px;
+}
+
+.battery-icon{
+    margin: 0 1em;
+}
